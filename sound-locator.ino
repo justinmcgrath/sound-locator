@@ -83,7 +83,6 @@ stereo_locator::stereo_locator(int mic1_pin, int mic2_pin, unsigned long sample_
   last_sample_time_ = millis();
 }
 
-int loops = 0;
 double stereo_locator::locate() {
   mic1_sample_.append(analogRead(mic1_pin_));
   mic2_sample_.append(analogRead(mic2_pin_));
@@ -118,16 +117,12 @@ double stereo_locator::locate() {
   } else {
     return -1;
   }
-
-
 }
 
 stereo_locator mic_locator = stereo_locator(A0, A1, 500, 200, 0.15);
 mover stepper_mover = mover(2048, 8, 10, 9, 11, 14, 100);
 
 double target_location = 0;
-fifo a(3);
-int i = 0;
 
 void setup()
 {
@@ -139,6 +134,8 @@ void setup()
   Serial.println("Start\n\n\nStart");
 }
 
+//fifo a(3);
+//int i = 0;
 //void loop() {
 //  double new_target = mic_locator.locate();
 //  Serial.println("target " + String(new_target));
